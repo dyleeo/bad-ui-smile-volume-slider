@@ -15,6 +15,10 @@ body {
     }
 }
 
+video {
+  border: 1px solid red;
+}
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 48em) {
