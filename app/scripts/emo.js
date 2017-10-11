@@ -77,7 +77,7 @@ let Emo = (()=>{
         let er = EC.meanPredict(cp);
 
         if(er){
-            document.querySelectorAll('.score')[0].innerHTML = er[3].value.toFixed(1);
+            document.querySelectorAll('.score')[0].innerHTML = er[3].value.toFixed(2);
             //console.log(er[3].emotion, er[3].value)
         }
         // if (er) {

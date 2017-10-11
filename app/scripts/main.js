@@ -35,15 +35,18 @@ const Main = (() => {
 
   }
 
+  let skip = 3, count=0;
   const render = () => {
 		requestAnimationFrame(render);
     //console.log(Emo.getCLTracking())
 
-    // let skip = 3, count=0;
-    // if(count % skip === 0){}
-    // count++;
 
-    Emo.render();
+    if(count % skip === 0){
+        Emo.render();
+    }
+    count++;
+
+
 
   }
 
