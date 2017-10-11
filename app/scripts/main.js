@@ -1,84 +1,83 @@
-const Proto = (() => {
+const Main = (() => {
 
-  const video = document.getElementById('videoel');
-  let vidW;
-  let vidH;
+  const BASE_VID_W = 400;
+  const BASE_VID_H = 300;
+  let VOLUME_TOGGLE;
+
+  let videoObj = {
+      video: document.getElementById('videoPlayer'),
+      w: BASE_VID_W,
+      h: BASE_VID_H
+  };
+
+  const getVideoObj = () => {
+      return videoObj;
+  }
 
   const init = () => {
-      // if(getUserMediaHandler()){
-      //   console.log('good to go');
-      // }else{
-      //   console.log('fail')
-      // }
-      //
-      //
-      //
-      //
-
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-				window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
-				// check for camerasupport
-				if (navigator.mediaDevices) {
-					navigator.mediaDevices.getUserMedia({video : true}).then(gumSuccess).catch(gumFail);
-				} else if (navigator.getUserMedia) {
-					navigator.getUserMedia({video : true}, gumSuccess, gumFail);
-				} else {
-					alert('This demo depends on getUserMedia, which your browser does not seem to support. :(');
-				}
-
-
-      //initVideo();
+      Camera.init()
+      .then(() => {
+        //alert("S")
+        videoObj.video.addEventListener('canplay', startEmotionDetect, false);
+      })
   }
 
-  const gumSuccess = (stream) => {
-    vidW = video.width;
-    vidH = video.height;
-    if ('srcObject' in video) {
-          video.srcObject = stream;
-    } else {
-          video.src = (window.URL && window.URL.createObjectURL(stream));
-    }
-    video.onloadedmetadata = function() {
-      //adjustVideoProportions();
-      video.play();
-    }
+  const startEmotionDetect = () => {
+      //video is ready to be processes - start emotion detection
+      Emo.init()
+      .then(() => {
+          console.log('EMO inited')
+          render();
+      })
+
+      //enable volume button
+      initButtonHandlers();
+
   }
 
-  const initVideo = () => {
-      // vidW = video.width;
-      // vidH = video.height;
-      // if ('srcObject' in video) {
-			// 	    video.srcObject = stream;
-			// } else {
-			// 	    video.src = (window.URL && window.URL.createObjectURL(stream));
-			// }
-			// video.onloadedmetadata = function() {
-			// 	adjustVideoProportions();
-			// 	video.play();
-			// }
+  const render = () => {
+		requestAnimationFrame(render);
+    //console.log(Emo.getCLTracking())
+
+    // let skip = 3, count=0;
+    // if(count % skip === 0){}
+    // count++;
+
+    Emo.render();
+
   }
 
-  const getUserMediaHandler = () => {
-      if (window.location.protocol == 'file:') {
-            alert('You seem to be running this example directly from a file. Note that these examples only work when served from a server or localhost due to canvas cross-domain restrictions.');
-            return false;
-      } else if (window.location.hostname !== 'localhost' && window.location.protocol !== 'https:'){
-          window.location.protocol = 'https';
-          return true;
-      }
+
+
+  const initButtonHandlers = () => {
+
+      VOLUME_TOGGLE = document.querySelectorAll('.volume-toggle')[0];
+
+      //MOUSE UP
+      VOLUME_TOGGLE.addEventListener("mousedown", function(event){
+          console.log('down fired');
+          var target = Utils._touchTest(event);
+          Emo.setCLTracking(true);
+      }, true);
+
+      //MOUSE DOWN
+      VOLUME_TOGGLE.addEventListener("mouseup", function(event){
+          console.log('up fired');
+          var target = Utils._touchTest(event);
+          Emo.setCLTracking(false);
+      }, true);
+      console.log(':: button events initilized')
   }
 
-  function gumFail() {
-		  alert('There was some problem trying to fetch video from your webcam. If you have a webcam, please make sure to accept when the browser asks for access to your webcam.');
-	}
 
 
   return {
-      init
+      init,
+      getVideoObj
   }
 
 })();
 
 window.onload = () => {
-    Proto.init();
+    Main.init();
 }

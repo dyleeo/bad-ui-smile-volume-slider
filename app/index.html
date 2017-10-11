@@ -30,15 +30,17 @@
     <div>Hello</div>
 
     <div id="container">
-			<video id="videoel" width="400" height="300" preload="auto" loop playsinline autoplay>
+			<video id="videoPlayer" width="400" height="300" preload="auto" loop playsinline autoplay>
 			</video>
 			<canvas id="overlay" width="400" height="300"></canvas>
 		</div>
 
+    <div class="volume-toggle"></div>
+
+    <div class="score"></div>
+
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/popper.js/dist/umd/popper.js"></script>
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <script src="/bower_components/gsap/src/uncompressed/TweenMax.js"></script>
     <!-- endbower -->
@@ -50,6 +52,11 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
+    <script src="scripts/clmEmo/emotionModel.js"></script>
+    <script src="scripts/clmEmo/emotionClassifier.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/emo.js"></script>
+    <script src="scripts/cameraHandler.js"></script>
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
   </body>
