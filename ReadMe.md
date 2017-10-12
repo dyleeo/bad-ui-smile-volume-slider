@@ -22,4 +22,5 @@ Built with Yeoman Scaffolding via gulp
 ---
 
 ARTIST: Steve Jackson (bit.ly/2bzczlV)
-Royalty Free Music ★ Dance Pop Upbeat Fashion ★ CREATIVE COMMONS
+CREATIVE COMMONS
+Royalty Free Music: www.soundotcom.com
