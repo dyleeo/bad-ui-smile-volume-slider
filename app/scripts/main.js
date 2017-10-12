@@ -2,7 +2,6 @@ const Main = (() => {
 
   const BASE_VID_W = 400;
   const BASE_VID_H = 300;
-  let VOLUME_TOGGLE;
 
   let videoObj = {
       video: document.getElementById('videoPlayer'),
@@ -15,11 +14,12 @@ const Main = (() => {
   }
 
   const init = () => {
+
       Camera.init()
       .then(() => {
-        //alert("S")
         videoObj.video.addEventListener('canplay', startEmotionDetect, false);
       })
+
   }
 
   const startEmotionDetect = () => {
@@ -28,48 +28,30 @@ const Main = (() => {
       .then(() => {
           console.log('EMO inited')
           render();
+          //sound/volume events
+          initSound();
       })
 
-      //enable volume button
-      initButtonHandlers();
+
 
   }
 
   let skip = 3, count=0;
   const render = () => {
 		requestAnimationFrame(render);
-    //console.log(Emo.getCLTracking())
 
-
-    if(count % skip === 0){
-        Emo.render();
+    if(Sound.getChangeVolumeStatus()){
+        if(count % skip === 0){
+            Emo.render();
+        }
+        Sound.volumeHandler();
     }
     count++;
 
-
-
   }
 
-
-
-  const initButtonHandlers = () => {
-
-      VOLUME_TOGGLE = document.querySelectorAll('.volume-toggle')[0];
-
-      //MOUSE UP
-      VOLUME_TOGGLE.addEventListener("mousedown", function(event){
-          console.log('down fired');
-          var target = Utils._touchTest(event);
-          Emo.setCLTracking(true);
-      }, true);
-
-      //MOUSE DOWN
-      VOLUME_TOGGLE.addEventListener("mouseup", function(event){
-          console.log('up fired');
-          var target = Utils._touchTest(event);
-          Emo.setCLTracking(false);
-      }, true);
-      console.log(':: button events initilized')
+  const initSound = () => {
+    Sound.init();
   }
 
 

@@ -7,6 +7,7 @@
     <title>smile</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- build:css styles/vendor.css -->
@@ -27,36 +28,93 @@
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div>Hello</div>
 
-    <div id="container">
-			<video id="videoPlayer" width="400" height="300" preload="auto" loop playsinline autoplay>
-			</video>
-			<canvas id="overlay" width="400" height="300"></canvas>
-		</div>
+    <header>
+        <div class="header-box">
+            <h1>Bad Volume Controller UI</h1>
+            <h4>Control the volume with a smile.  😃</h4>
+            <p>While click/holding on the speaker icon, look <br>into the camera and control the volume with your smile.</p>
 
-    <div class="volume-toggle"></div>
+            <p>
+              <small>* A web cam is needed for this experience</small><br>
+              <small>** Hit 'Q' to display face tracker</small>
+            </p>
 
-    <div class="score"></div>
+            <p><small>@dyleeo</small></p>
+
+        </div>
+    </header>
+
+    <audio id="audioplayer" src="sounds/ho_hey.mp3" loop="true" preload="true"></audio>
+
+    <div class="player-container">
+  		<div class="audio-player">
+  			   <div id="play-btn" class="play"></div>
+			      <div class="timeline">
+               <div class="playhead"></div>
+           </div>
+
+          <div class="volume-toggle">
+              <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+      	       width="35.868px" height="65.326px" viewBox="0 0 35.868 65.326" enable-background="new 0 0 35.868 65.326" xml:space="preserve">
+                <g><g><path class="bgfill" d="M5.833,47.74c0,0.55-0.45,1-1,1H1c-0.55,0-1-0.45-1-1v-28.75c0-0.55,0.45-1,1-1h3.833c0.55,0,1,0.45,1,1V47.74z"/></g>
+                  <g><path class="bgfill" d="M9.665,17.068c-0.458,0.305-0.832,1.005-0.832,1.555v13.535c0,0.55,0,1.45,0,2v13.535c0,0.55,0.381,1.24,0.846,1.533
+                			l25.342,15.968c0.465,0.293,0.846,0.083,0.846-0.467V34.157c0-0.55,0-1.45,0-2V0.588c0-0.55-0.375-0.75-0.832-0.445L9.665,17.068z
+                			"/></g></g>
+              </svg>
+          </div>
+          <div class="volume-bar-bg">
+              <div class="volume-bar">
+                <div class="score"></div>
+              </div>
+          </div>
+
+	</div>
+
+  <div id="container">
+    <video id="videoPlayer" width="400" height="300" preload="auto" loop playsinline autoplay>
+    </video>
+    <canvas id="overlay" width="400" height="300"></canvas>
+  </div>
+
+
+  <footer>
+    <div class='holder-20'>
+    <h3>Credits</h3>
+    </div>
+
+    <div class='holder'>
+    <strong>Music</strong><br>
+    Artist: Steve Jackson <a href='http://bit.ly/2bzczlV'>bit.ly/2bzczlV</a><br>
+    Royalty Free Music: <a href="www.soundotcom.com">www.soundotcom.com</a>
+    </div>
+
+    <div class='holder'>
+    <strong>Computer Vision Library</strong><br>
+    CLMTrackr by Audun Øygard <a href="https://github.com/auduno/clmtrackr">https://github.com/auduno/clmtrackr</a>
+    </div>
+  </footer>
+
+
+
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/popper.js/dist/umd/popper.js"></script>
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <script src="/bower_components/gsap/src/uncompressed/TweenMax.js"></script>
     <!-- endbower -->
     <script src="/bower_components/clmtracker/clmtrackr.min.js"></script>
     <script src="/bower_components/clmtracker/models/model_pca_20_svm.js"></script>
+    <script src="scripts/clmEmo/emotionModel.js"></script>
+    <script src="scripts/clmEmo/emotionClassifier.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/plugins.js -->
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
-    <script src="scripts/clmEmo/emotionModel.js"></script>
-    <script src="scripts/clmEmo/emotionClassifier.js"></script>
     <script src="scripts/utils.js"></script>
+    <script src="scripts/audioPlayer.js"></script>
     <script src="scripts/emo.js"></script>
     <script src="scripts/cameraHandler.js"></script>
     <script src="scripts/main.js"></script>

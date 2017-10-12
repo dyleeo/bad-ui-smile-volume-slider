@@ -7,6 +7,7 @@ let Emo = (()=>{
     let OVERLAY_CONTEXT;
     let EC;
     let EMOTION_DATA;
+    let EMO_PERCENT = 0;
 
     const init = () => {
         return new Promise( (resolve, reject) => {
@@ -14,11 +15,6 @@ let Emo = (()=>{
             INIT_PROMISE.then((data) => {
                 resolve();
             })
-            // setTimeout(function(){
-            //   //temp
-            //   INIT_PROMISE.resolve();
-            //   alert('')
-            // }, 1500)
 
             buildFeedbackOverlay()
             optimizeModel();
@@ -29,7 +25,6 @@ let Emo = (()=>{
     				EC = new emotionClassifier();
     				EC.init(emotionModel);
     				EMOTION_DATA = EC.getBlank();
-
         })
     }
 
@@ -72,32 +67,33 @@ let Emo = (()=>{
 					CTRACK.draw(OVERLAY_CANVAS);
 				}
 
-
 				let cp = CTRACK.getCurrentParameters();
         let er = EC.meanPredict(cp);
 
         if(er){
-            document.querySelectorAll('.score')[0].innerHTML = er[3].value.toFixed(2);
+            let percent = er[3].value.toFixed(2);
+            if(percent> .96)
+              percent = 1;
+
+            if(percent<.06)
+              percent=0;
+
+            EMO_PERCENT = percent;
+            document.querySelectorAll('.score')[0].innerHTML = (EMO_PERCENT * 100).toFixed(0);
             //console.log(er[3].emotion, er[3].value)
         }
-        // if (er) {
-				// 		//updateData(er);
-        //     console.log(er)
-        //     for (var i = 0;i < er.length;i++) {
-  			// 				if (er[i].value > 0.4) {
-				//               //document.getElementById('icon'+(i+1)).style.visibility = 'visible';
-  			// 				} else {
-				//               //document.getElementById('icon'+(i+1)).style.visibility = 'hidden';
-  			// 				}
-				// 		}
-				// }
 
+    }
+
+    const getPercent = () => {
+        return EMO_PERCENT;
     }
 
     return {
         init,
         getCLTracking,
         setCLTracking,
-        render
+        render,
+        getPercent
     }
 })();

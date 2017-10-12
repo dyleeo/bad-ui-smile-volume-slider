@@ -2,7 +2,7 @@
 //EMOTION CLASIFIER
 //https://github.com/auduno/clmtrackr/blob/dev/examples/js/emotion_classifier.js
 
-"use strict";
+'use strict';
 var emotionClassifier = function() {
 
 	var previousParameters = [];
@@ -28,7 +28,7 @@ var emotionClassifier = function() {
 	this.getBlank = function() {
 		var prediction = [];
 		for (var j = 0;j < emotions.length;j++) {
-			prediction[j] = {"emotion" : emotions[j], "value" : 0.0};
+			prediction[j] = {'emotion' : emotions[j], 'value' : 0.0};
 		}
 		return prediction;
 	}
@@ -41,7 +41,7 @@ var emotionClassifier = function() {
 			for (var i = 0;i < coefficient_length;i++) {
 				score += classifier[e].coefficients[i]*parameters[i+6];
 			}
-			prediction[j] = {"emotion" : e, "value" : 0.0};
+			prediction[j] = {'emotion' : e, 'value' : 0.0};
 			prediction[j]['value'] = 1.0/(1.0 + Math.exp(-score));
 		}
 		return prediction;
