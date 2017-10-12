@@ -24,6 +24,8 @@ header{
 
 
     .header-box{
+        position: relative;
+        z-index: 10;
         width: 700px;
         margin: 0 auto;
         font-weight: 300;
@@ -48,7 +50,7 @@ small{ color: #aaa; }
     //left: 50%;
     //top: 50%;
     //transform: translate(-50%, -50%);
-    padding-top: 150px;
+    padding-top: 100px;
 
     .audio-player{
 
@@ -124,10 +126,12 @@ small{ color: #aaa; }
 .pause{background: url('../images/pause.png') ;}
 
 #container {
-	position : relative;
+	position : fixed;
+  top: 0px;
+  right: 0px;
 	width : 370px;
-  margin: 45px auto 0 auto;
-  z-index: -1;
+  margin: 25px auto 0 auto;
+  z-index: 0;
   transform: scale(0.75);
   display: none;
 }
@@ -147,7 +151,7 @@ small{ color: #aaa; }
 	-webkit-transform : scaleX(-1);
 	transform : scaleX(-1);
 	-ms-filter : fliph; /*IE*/
-	filter : fliph; /*IE*/
+	filter : fliph ; /*IE*/
   // display: none;
 }
 
@@ -164,15 +168,14 @@ small{ color: #aaa; }
 
 
 footer{
-    position: fixed;
-    width: 700px;
-    transform: translateX(-50%);
-    bottom: 0px;
-    left: 50%;
+    // position: fixed;
+    width: 500px;
+    margin: 150px auto 0 auto;
+    //transform: translateX(-50%);
     font-weight: 300;
     font-size: 10px;
     color: #333;
-    margin-bottom: 30px;
+    margin-bottom: 250px;
 
     h3{
       margin-top: 0;
