@@ -1,6 +1,10 @@
-#Smile for volume
+# Smile for volume
 
-##My rendition of a bad volume control UI interfaces
+## My rendition of a bad volume control UI interfaces
+
+-Dependencies
+    CLMTrackr by Auduno
+    https://github.com/auduno/clmtrackr
 
 ---
 
